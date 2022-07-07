@@ -1,7 +1,0 @@
-{
-  "name": "dev_knife",
-  "template": "Default",
-  "isConfigured": {
-    "client": true
-  }
-}
