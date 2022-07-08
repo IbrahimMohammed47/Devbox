@@ -1,12 +1,11 @@
 # Devbox
-  Treat your swiss knives.
+  Treat your swiss-knives.
 
 ## Description
   Anyone works with tech will usually have multiple tools under their belt. This website allows users to **manage** their favourite tools, categorize and organize them in custom toolboxes. It also encourages users to share their toolboxes, allowing other users to **merge** them into theirs, or **clone** them into their accounts. The website has a **rating system** because good tools deserve to be posted on a **winner board** !
   
   
-## Reasoning
-
+## Technologies and Reasoning
 - Vue.js
   - simple and fast to develop small apps
   - simple state management with Vuex
