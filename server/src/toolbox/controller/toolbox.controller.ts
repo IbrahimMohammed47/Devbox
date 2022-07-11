@@ -11,6 +11,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { Tool } from 'src/tool/models/tool.entity';
 import { Toolbox } from '../models/toolbox.entity';
 import { ToolboxService } from '../service/toolbox.service';
 
@@ -45,10 +46,19 @@ export class ToolboxController {
     return this.tbxService.findUserToolboxes(userId);
   }
 
-  // @UseGuards(AuthGuard('jwt'))
-  // @Put(':id')
-  // putTool(@Body() partialTbx: Toolbox, @Param('id') id): Promise<any> {
-  //   return this.tbxService.update(id, partialTbx);
-  // }
+  @UseGuards(AuthGuard('jwt'))
+  @Put(':id/add_tool')
+  putTool(@Body() tool, @Param('id') id): Promise<any> {
+    let tbx = new Toolbox();
+    tbx.id = id;
+    return this.tbxService.addTool(tbx, tool);
+  }
 
+  @UseGuards(AuthGuard('jwt'))
+  @Put(':id/remove_tool')
+  removeTool(@Body() tool, @Param('id') id): Promise<any> {
+    let tbx = new Toolbox();
+    tbx.id = id;
+    return this.tbxService.removeTool(tbx, tool);
+  }
 }
