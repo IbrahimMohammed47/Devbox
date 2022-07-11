@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app clipped-left>
-      <h1>DEV-KNIFE</h1>
+      <h1>DEV-BOX</h1>
       <SearchBar style="transform: translate(20%); width: 40%" />
       <v-spacer></v-spacer>
 

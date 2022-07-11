@@ -7,9 +7,9 @@
           <v-badge :color="status" />
         </div>
 
-        <v-list-item-title class="text-h5 mb-1"> Headline 5 </v-list-item-title>
+        <v-list-item-title class="text-h5 mb-1"> {{tool.name}} </v-list-item-title>
         <v-list-item-subtitle
-          >Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle
+          >{{tool.description}}</v-list-item-subtitle
         >
       </v-list-item-content>
 
@@ -38,16 +38,22 @@
 <script>
 export default {
   name: "ToolComponent",
+  props: ['tool'],
   data: () => ({
-    rating: 4.5,
-    ratingC: 3300,
   }),
   computed: {
+    rating: function(){
+      return this.tool.rating_count>0?
+        (this.tool.rating_sum / this.tool.rating_count):
+        0;
+    },
+    ratingC: function(){
+      return this.tool.rating_count;
+    },
     status: function () {
-      let statuses = ["online", "unknown", "down"];
+      let statusVal = this.tool.status 
       let colors = { online: "green", unknown: "yellow", down: "red" };
-      let status = statuses[Math.floor(Math.random() * 3)];
-      return colors[status];
+      return colors[statusVal];
     },
   },
 };

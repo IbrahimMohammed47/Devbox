@@ -1,5 +1,5 @@
 <template>
-  <div style="position: relative; width: 100%; height: 100%">
+  <div v-if="selectedToolbox" style="position: relative; width: 100%; height: 100%">
     <v-speed-dial
       v-model="fab"
       style="position: absolute"
@@ -33,11 +33,10 @@
         <v-expansion-panel-content>
           <div class="toolHolder">
             <ToolComponent
-
-
               class="toool"
-              v-for="(tool, i) in tools.filter((t) => t.category == category)"
-              :key="i"
+              v-for="(tool) in selectedToolbox.tools.filter((t) => t.category == category)"
+              :tool="tool"
+              :key="tool.id"
             />
           </div>
         </v-expansion-panel-content>
@@ -53,62 +52,65 @@ export default {
   components: { ToolComponent },
   data: () => ({
     fab: false,
-    tools: [
-      {
-        name: "Mailer",
-        description: "Greyhound divisely hello coldly fonwderfully",
-        category: "categoryA",
-      },
-      {
-        name: "Diagrammer",
-        description: "Greyhound divisely hello coldly fonwderfully",
-        category: "categoryB",
-      },
-      {
-        name: "Storage",
-        description: "Greyhound divisely hello coldly fonwderfully",
-        category: "categoryC",
-      },
-      {
-        name: "Wireframer",
-        description: "Greyhound divisely hello coldly fonwderfully",
-        category: "categoryB",
-      },
-      {
-        name: "API",
-        description: "Greyhound divisely hello coldly fonwderfully",
-        category: "categoryB",
-      },
-      {
-        name: "Regexer",
-        description: "Greyhound divisely hello coldly fonwderfully",
-        category: "categoryC",
-      },
-      {
-        name: "Regexer",
-        description: "Greyhound divisely hello coldly fonwderfully",
-        category: "categoryC",
-      },
-      {
-        name: "Regexer",
-        description: "Greyhound divisely hello coldly fonwderfully",
-        category: "categoryC",
-      },
-      {
-        name: "Regexer",
-        description: "Greyhound divisely hello coldly fonwderfully",
-        category: "categoryC",
-      },
-      {
-        name: "Regexer",
-        description: "Greyhound divisely hello coldly fonwderfully",
-        category: "categoryC",
-      },
-    ],
+    // tools: [
+    //   {
+    //     name: "Mailer",
+    //     description: "Greyhound divisely hello coldly fonwderfully",
+    //     category: "categoryA",
+    //   },
+    //   {
+    //     name: "Diagrammer",
+    //     description: "Greyhound divisely hello coldly fonwderfully",
+    //     category: "categoryB",
+    //   },
+    //   {
+    //     name: "Storage",
+    //     description: "Greyhound divisely hello coldly fonwderfully",
+    //     category: "categoryC",
+    //   },
+    //   {
+    //     name: "Wireframer",
+    //     description: "Greyhound divisely hello coldly fonwderfully",
+    //     category: "categoryB",
+    //   },
+    //   {
+    //     name: "API",
+    //     description: "Greyhound divisely hello coldly fonwderfully",
+    //     category: "categoryB",
+    //   },
+    //   {
+    //     name: "Regexer",
+    //     description: "Greyhound divisely hello coldly fonwderfully",
+    //     category: "categoryC",
+    //   },
+    //   {
+    //     name: "Regexer",
+    //     description: "Greyhound divisely hello coldly fonwderfully",
+    //     category: "categoryC",
+    //   },
+    //   {
+    //     name: "Regexer",
+    //     description: "Greyhound divisely hello coldly fonwderfully",
+    //     category: "categoryC",
+    //   },
+    //   {
+    //     name: "Regexer",
+    //     description: "Greyhound divisely hello coldly fonwderfully",
+    //     category: "categoryC",
+    //   },
+    //   {
+    //     name: "Regexer",
+    //     description: "Greyhound divisely hello coldly fonwderfully",
+    //     category: "categoryC",
+    //   },
+    // ],
   }),
   computed: {
+    selectedToolbox:function(){
+      return this.$store.getters.getSelectedToolbox
+    },
     categories: function () {
-      return [...new Set(this.tools.map((t) => t.category))];
+      return [...new Set(this.selectedToolbox.tools.map((t) => t.category))];
     },
   },
 };

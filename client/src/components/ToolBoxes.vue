@@ -15,10 +15,10 @@
     <v-divider></v-divider>
 
     <v-list>
-      <v-list-item-group v-model="selectedItem" color="primary">
-        <v-list-item v-for="(item, i) in items" :key="i">
+      <v-list-item-group v-model="selectedTbx" color="primary">
+        <v-list-item v-for="(tbx) in $store.getters.getToolboxes" :key="tbx.id">
           <v-list-item-content>
-            <v-list-item-title v-text="item.text"></v-list-item-title>
+            <v-list-item-title v-text="tbx.name"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
@@ -29,16 +29,19 @@
 <script>
 export default {
   name: "ToolBoxes",
-  data: () => ({
-    selectedItem: 0,
-    items: [
-      { text: "Default" },
-      { text: "Developer" },
-      { text: "Designer" },
-      { text: "Custom" },
-      { text: "TbxNice" },
-    ],
-  }),
+  computed:{
+    toolboxes: function () {
+      return this.$store.getters.getToolboxes;
+    },
+    selectedTbx: {
+      get () {
+        return this.$store.getters.getSelectedToolboxIdx
+      },
+      set (value) {
+        this.$store.commit('updateSelectedToolbox', value)
+      }
+    }
+  }
 };
 </script>
 <style scoped>
