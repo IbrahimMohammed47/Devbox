@@ -10,8 +10,8 @@
     flat
     hide-no-data
     hide-details
-    item-text="Description"
-    item-value="API"
+    item-text="txt"
+    item-value="id"
     label="Search For a Tool...(Ctrl+F)"
     placeholder="Start typing to Search"
     solo-inverted
@@ -31,24 +31,23 @@ export default {
   }),
 
   computed: {
-    fields() {
-      if (!this.model) return [];
+    // fields() {
+    //   if (!this.model) return [];
 
-      return Object.keys(this.model).map((key) => {
-        return {
-          key,
-          value: this.model[key] || "n/a",
-        };
-      });
-    },
+    //   return Object.keys(this.model).map((key) => {
+    //     return {
+    //       key,
+    //       value: this.model[key] || "n/a",
+    //     };
+    //   });
+    // },
     items() {
       return this.entries.map((entry) => {
-        const Description =
-          entry.Description.length > this.descriptionLimit
-            ? entry.Description.slice(0, this.descriptionLimit) + "..."
-            : entry.Description;
-
-        return Object.assign({}, entry, { Description });
+        const description =
+          entry.description.length > this.descriptionLimit
+            ? entry.description.slice(0, this.descriptionLimit) + "..."
+            : entry.description;
+        return Object.assign({}, entry, { description, txt:entry.name+": "+entry.description });
       });
     },
   },
@@ -64,15 +63,17 @@ export default {
       this.isLoading = true;
 
       // Lazily load input items
-      fetch("https://api.publicapis.org/entries")
-        .then((res) => res.json())
-        .then((res) => {
-          this.entries = res.entries;
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => (this.isLoading = false));
+      // fetch("https://api.publicapis.org/entries")
+      //   .then((res) => res.json())
+      //   .then((res) => {
+      //     this.entries = res.entries;
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   })
+      //   .finally(() => (this.isLoading = false));
+      this.entries = this.$store.getters.getTools
+      this.isLoading = false
     },
   },
 };
