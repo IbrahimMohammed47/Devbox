@@ -1,15 +1,12 @@
 import { IsEnum, IsString, isURL, IsUrl, Length } from 'class-validator';
-import { Toolbox } from 'src/toolbox/models/toolbox.entity';
 import {
   AfterLoad,
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { UserRating } from './userRating.entity';
 
 export enum ToolCategory {
   MISC = 'misc',
