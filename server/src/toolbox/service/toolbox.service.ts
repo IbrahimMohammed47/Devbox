@@ -34,47 +34,44 @@ export class ToolboxService {
     return this.tbxRepo
       .createQueryBuilder('tbx')
       .leftJoinAndSelect('tbx.tools', 'tool')
-      // .leftJoinAndSelect('tool.ratings', 'userRating')
       .where('tbx.ownerId = :userId', { userId })
-      // .andWhere(
-      //   new Brackets((qb) => {
-      //     qb
-      //     .where('userRating.userId = :userId', { userId })
-      //     .orWhere('userRating.userId IS NULL');
-      //   }),
-      // ).printSql()
       .getMany();
   }
 
-  addTool(tbx: Toolbox, tool: Tool): Promise<any> {
-    tbx.tools.push(tool);
-    return this.tbxRepo.save(tbx); // IS THIS EFFECIENT ?
+  async addTool(tbx: Toolbox, tool: Tool): Promise<any> {
+    await this.tbxRepo
+    .createQueryBuilder()
+    .relation(Toolbox, "tools")
+    .of(tbx)
+    .add(tool);
   }
 
-  removeTool(tbx: Toolbox, toolId: number): Promise<any> {
-    let toolIndex: number = tbx.tools.findIndex((t) => t.id == toolId);
-    tbx.tools.splice(toolIndex, 1);
-    return this.tbxRepo.save(tbx); // IS THIS EFFECIENT ?
+  async removeTool(tbx: Toolbox, tool: Tool): Promise<any> {
+    await this.tbxRepo
+    .createQueryBuilder()
+    .relation(Toolbox, "tools")
+    .of(tbx)
+    .remove(tool);
   }
+  // // doesn't persist (frontend)
+  // async clone(tbx: Toolbox, newUserId: number): Promise<Toolbox> {
+  //   tbx = await this.tbxRepo.findOne(tbx.id)
+  //   let newTbx = { ...tbx };
+  //   newTbx.ownerId = newUserId;
+  //   newTbx.id = null;
+  //   newTbx.createdAt = null;
+  //   newTbx.updatedAt = null;
+  //   return tbx;
+  // }
 
-  // doesn't persist
-  clone(tbx: Toolbox, newUserId: number): Toolbox {
-    let newTbx = { ...tbx };
-    newTbx.ownerId = newUserId;
-    newTbx.id = null;
-    newTbx.createdAt = null;
-    newTbx.updatedAt = null;
-    return tbx;
-  }
-
-  // doesn't persist
-  merge(sourceTbx: Toolbox, targetTbx: Toolbox): Toolbox {
-    let sourceTbxTools: Tool[] = sourceTbx.tools;
-    let targetTbxTools: Tool[] = targetTbx.tools;
-    let newTools = sourceTbxTools.filter(
-      (t) => targetTbxTools.findIndex((t2) => t2.id != t.id) > -1,
-    );
-    targetTbx.tools.push(...newTools);
-    return targetTbx;
-  }
+  // // doesn't persist (frontend)
+  // merge(sourceTbx: Toolbox, targetTbx: Toolbox): Toolbox {
+  //   let sourceTbxTools: Tool[] = sourceTbx.tools;
+  //   let targetTbxTools: Tool[] = targetTbx.tools;
+  //   let newTools = sourceTbxTools.filter(
+  //     (t) => targetTbxTools.findIndex((t2) => t2.id != t.id) > -1,
+  //   );
+  //   targetTbx.tools.push(...newTools);
+  //   return targetTbx;
+  // }
 }
