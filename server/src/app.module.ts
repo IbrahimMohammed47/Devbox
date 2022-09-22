@@ -9,9 +9,7 @@ import { ToolboxModule } from './toolbox/toolbox.module';
 import { UserModule } from './user/user.module';
 import { APP_FILTER } from '@nestjs/core';
 import { AllExceptionsFilter } from './filters/allexceptions.filter';
-import { ScheduleModule } from '@nestjs/schedule';
-import { ProductHuntImporter } from './crons/producthunt-importer.cron';
-import { GraphQLRequestModule } from '@golevelup/nestjs-graphql-request';
+import { CronsModule } from './crons/crons.module';
 
 @Module({
   imports: [
@@ -29,24 +27,14 @@ import { GraphQLRequestModule } from '@golevelup/nestjs-graphql-request';
     AuthModule,
     ToolboxModule,
     ToolModule,
-    ScheduleModule.forRoot(),
-    GraphQLRequestModule.forRoot(GraphQLRequestModule, {
-      // Exposes configuration options based on the graphql-request package
-      endpoint: process.env.PRODUCT_HUNT_ENDPOINT,
-      options: {
-        headers: {
-          'content-type': 'application/json',
-          'Authorization': `Bearer ${process.env.PRODUCT_HUNT_TOKEN}`,
-        },
-      },
-    }),
+    CronsModule
   ],
   controllers: [AppController],
   providers: [AppService,
     {
       provide: APP_FILTER,
       useClass: AllExceptionsFilter,
-    }, ProductHuntImporter
+    }, 
 ],
 })
 export class AppModule {}

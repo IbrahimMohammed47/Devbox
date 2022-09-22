@@ -9,5 +9,6 @@ import { ToolService } from './service/tool.service';
   imports: [TypeOrmModule.forFeature([Tool, UserRating])],
   controllers: [ToolController],
   providers: [ToolService],
+  exports:[ToolService]
 })
 export class ToolModule {}

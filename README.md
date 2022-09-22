@@ -53,7 +53,7 @@
     - Install server and client dependencies
     cd server && npm i --save && cd ../client && npm i --save && cd ..
     - Start services with docker-compose with your custom env file
-    cd server && sudo docker compose --env-file dev.env up
-    - Run server and client  
+    cd server && sudo docker compose --env-file dev.env up 
+    - Run server and client (in a new shell)
     cd server && npm run serve && cd ../client && npm run serve
     TODO: Add server and client to docker-compose

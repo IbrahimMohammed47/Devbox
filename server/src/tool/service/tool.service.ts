@@ -13,8 +13,12 @@ export class ToolService {
   ) {}
 
   async create(tool: Tool): Promise<number> {
-    
     return (await this.toolRepo.save(tool)).id
+  }
+
+  async bulkCreate(tools: Tool[]): Promise<any> {
+    // this.toolRepo.()
+    return (await this.toolRepo.upsert(tools,['name']));
   }
 
   async update(toolId: number, tool: Partial<Tool>): Promise<any> {
