@@ -2,7 +2,7 @@
   Treat your swiss-knives.
 
 ## Description
-  Anyone works with tech will usually have multiple tools under their belt. This website allows users to **manage** their favourite tools, categorize and organize them in custom toolboxes. It also encourages users to share their toolboxes, allowing other users to **merge** them into theirs, or **clone** them into their accounts. The website has a **rating system** because good tools deserve to be posted on a **winner board** !
+  Anyone works with tech will usually have multiple tools under their belt. This website allows users to **manage** their favourite tools, categorize and organize them in custom toolboxes. It also encourages users to share their toolboxes, allowing other users to **merge** them into theirs, or **clone** them into their accounts. The website has a **rating system** because good tools deserve to be posted on a **winner board**, the tools can be listed in the system manually by **admin** or automatically from producthunt **integration** !
   
   
 ## Technologies and Reasoning
@@ -44,6 +44,9 @@
     - nice performance
     - supports materialized views and JSON datastructure
 
+- Integration
+  - GraphQL client to query producthunt API
+  - Cron job to to query producthunt API periodically and bulk insert data to our database
 
 ## Installation and Running
 ### Locally
@@ -51,6 +54,6 @@
     cd server && npm i --save && cd ../client && npm i --save && cd ..
     - Start services with docker-compose with your custom env file
     cd server && sudo docker compose --env-file dev.env up
-    - Run server and client  414  sudo docker compose --env-file dev.env up (in a new terminal)
+    - Run server and client  
     cd server && npm run serve && cd ../client && npm run serve
     TODO: Add server and client to docker-compose
