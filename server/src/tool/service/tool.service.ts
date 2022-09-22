@@ -16,7 +16,7 @@ export class ToolService {
     return (await this.toolRepo.save(tool)).id
   }
 
-  async bulkCreate(tools: Tool[]): Promise<any> {
+  async bulkUpsert(tools: Tool[]): Promise<any> {
     // this.toolRepo.()
     return (await this.toolRepo.upsert(tools,['name']));
   }
