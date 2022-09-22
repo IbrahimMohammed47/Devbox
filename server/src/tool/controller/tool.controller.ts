@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseArrayPipe,
   Patch,
   Post,
   Put,
@@ -49,12 +50,12 @@ export class ToolController {
   @Get()
   find(
     @Query('keyword') keyword,
-    @Query('category') category,
+    @Query('tags', new ParseArrayPipe({ items: String, separator: ',' })) tags,
     @Query('take') take,
     @Query('skip') skip): Promise<any> {
     let opts = {}
     if(keyword) opts['name'] = keyword
-    if(category) opts['category'] = category
+    if(tags) opts['tags'] = tags
     take = take || 10
     skip = skip || 0
     return this.toolService.find(opts, take, skip);

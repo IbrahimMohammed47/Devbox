@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 2000,
     "height": 2000,
-    "scrollTop": -122,
-    "scrollLeft": -2,
+    "scrollTop": -236,
+    "scrollLeft": 0,
     "zoomLevel": 1,
     "show": {
       "tableComment": true,
@@ -532,9 +532,9 @@
             "id": "54a1fa22-09cd-4524-b86f-3642186c9985"
           },
           {
-            "name": "category",
+            "name": "tags",
             "comment": "",
-            "dataType": "enum",
+            "dataType": "array",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -605,7 +605,7 @@
           "active": false,
           "left": 0,
           "top": 324,
-          "zIndex": 2,
+          "zIndex": 9,
           "widthName": 60,
           "widthComment": 60
         },

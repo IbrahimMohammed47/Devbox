@@ -1,4 +1,4 @@
-import { IsEnum, IsString, isURL, IsUrl, Length } from 'class-validator';
+import { IsString, IsArray, IsUrl, Length } from 'class-validator';
 import {
   AfterLoad,
   Column,
@@ -8,24 +8,24 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-export enum ToolCategory {
-  MISC = 'misc',
-  API = 'api',
-  EMAIL = 'email',
-  DESGIN = 'design',
-  VISUALIZATION = 'visualization',
-  TEXT = 'text',
-  GENERATOR = 'generator/faker',
-  FORMATTER = 'formatter',
-  CODE_QUALITY = 'codeQuality',
-  TESTING = 'testing',
-  ML = 'ml',
-  COMMS = 'communincation',
-  DIAGRAMMING = 'diagramming',
-  MEDIA = 'media',
-  SECURITY = 'security',
-  OPS = 'operations',
-}
+// export enum ToolCategory {
+//   MISC = 'misc',
+//   API = 'api',
+//   EMAIL = 'email',
+//   DESGIN = 'design',
+//   VISUALIZATION = 'visualization',
+//   TEXT = 'text',
+//   GENERATOR = 'generator/faker',
+//   FORMATTER = 'formatter',
+//   CODE_QUALITY = 'codeQuality',
+//   TESTING = 'testing',
+//   ML = 'ml',
+//   COMMS = 'communincation',
+//   DIAGRAMMING = 'diagramming',
+//   MEDIA = 'media',
+//   SECURITY = 'security',
+//   OPS = 'operations',
+// }
 @Entity()
 export class Tool {
   @PrimaryGeneratedColumn()
@@ -49,9 +49,13 @@ export class Tool {
   @Column({ nullable: true })
   img: string;
 
-  @IsEnum(ToolCategory)
-  @Column({ type: 'enum', enum: ToolCategory })
-  category: ToolCategory;
+  // @IsEnum(ToolCategory)
+  // @Column({ type: 'enum', enum: ToolCategory })
+  // category: ToolCategory;
+
+  @IsArray()
+  @Column({  type: "text",  array: true, default:[]})
+  tags: string[];
 
   @Column('decimal', { scale: 2, default: 0.0 })
   ratings_sum: number;

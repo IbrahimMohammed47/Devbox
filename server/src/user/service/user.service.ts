@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindConditions, Repository } from 'typeorm';
+import { FindOptionsWhere, Repository } from 'typeorm';
 import { User } from '../models/user.entity';
 
 @Injectable()
@@ -17,15 +17,16 @@ export class UserService {
     return this.userRepo.find();
   }
 
-  findOne(opts: FindConditions<User>): Promise<User> {
+  findOne(opts: FindOptionsWhere<User>): Promise<User> {
     return this.userRepo.findOne({ where: opts });
   }
 
   findUserTbxs(userId: number): Promise<User> {
-    return this.userRepo.findOne(userId, {
+    return this.userRepo.findOne({
       select: ['toolboxes'],
       relations: ['toolboxes'],
       where: {
+        id:userId,
         toolboxes: {
           isPrivate: false,
         },

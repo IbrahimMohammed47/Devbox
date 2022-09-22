@@ -11,7 +11,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { Tool } from 'src/tool/models/tool.entity';
 import { Toolbox } from '../models/toolbox.entity';
 import { ToolboxService } from '../service/toolbox.service';
 
@@ -29,12 +28,14 @@ export class ToolboxController {
 
   @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
+  //check owner
   update(@Body() partialTbx: Toolbox, @Param('id') id): Promise<any> {
     return this.tbxService.update(id, partialTbx);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
+  //check owner
   delete(@Param('id') id): Promise<any> {
     return this.tbxService.delete(id);
   }
@@ -48,6 +49,7 @@ export class ToolboxController {
 
   @UseGuards(AuthGuard('jwt'))
   @Put(':id/add_tool')
+  //check owner
   putTool(@Body() tool, @Param('id') id): Promise<any> {
     let tbx = new Toolbox();
     tbx.id = id;
@@ -56,6 +58,7 @@ export class ToolboxController {
 
   @UseGuards(AuthGuard('jwt'))
   @Put(':id/remove_tool')
+  //check owner
   removeTool(@Body() tool, @Param('id') id): Promise<any> {
     let tbx = new Toolbox();
     tbx.id = id;
