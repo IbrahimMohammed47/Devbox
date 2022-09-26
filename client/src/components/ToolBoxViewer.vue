@@ -20,12 +20,12 @@
         </v-btn>
         <span>Add Tool</span>
       </v-tooltip>
-      <v-tooltip disabled left :value="true">
+      <!-- <v-tooltip disabled left :value="true">
         <v-btn fab dark small slot="activator">
           <v-icon>mdi-plus</v-icon>
         </v-btn>
         <span>Add Category</span>
-      </v-tooltip>
+      </v-tooltip> -->
     </v-speed-dial>
     <v-expansion-panels>
       <v-expansion-panel v-for="(category, i) in categories" :key="i">

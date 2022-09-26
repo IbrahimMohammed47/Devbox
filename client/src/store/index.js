@@ -32,7 +32,7 @@ export default new Vuex.Store({
             category:"email",
             rating_sum: 9.5,
             rating_count: 2,
-            status: "uknown"
+            status: "unknown"
           }
         ]
       },
@@ -51,7 +51,7 @@ export default new Vuex.Store({
             category:"design",
             rating_sum: 4.5,
             rating_count: 3,
-            status: "red"
+            status: "down"
           }
         ],
       }
